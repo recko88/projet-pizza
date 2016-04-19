@@ -11,13 +11,32 @@
 
 <body> 
 	<img src="http://lorempixel.com/1300/100" /> <!--logo (avec une bannière derriere si possible) -->
+	
+        <script type="text/javascript">
+            var picPaths = ['pic1.jpg','pic2.jpg','pic3.jpg'];
+            var curPic = -1;
+            //precharge les images pour une meilleur animation
+            var imgO = new Array();
+            for(i=0; i < picPaths.length; i++) {
+                imgO[i] = new Image();
+                imgO[i].src = picPaths[i];
+            }
 
-	<div id = carrousel>
-		<ul>
-			<li><img src="#"/></li>
-			<li><img src="#"/></li>
-			<li><img src="#"/></li>
-		</ul>
+            function swapImage() {
+                curPic = (++curPic > picPaths.length-1)? 0 : curPic;
+                imgCont.src = imgO[curPic].src;
+                setTimeout(swapImage,2000);
+            }
+
+            window.onload=function() {
+                imgCont = document.getElementById('imgBanner');
+                swapImage();
+            }
+        </script>
+        <div id=carrousel>
+            <img id="imgBanner" src="" alt="" />
+        </div>
+</html>
 	</div>
 	<div id=desciption-pizzeria>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam placerat tortor at laoreet ullamcorper. Praesent pellentesque urna ex, at mattis odio viverra quis. In tincidunt, justo sit amet tempor porttitor, neque tellus cursus ex, quis tincidunt risus erat at elit. </p>
